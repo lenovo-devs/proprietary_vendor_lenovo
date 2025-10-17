@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2019-2020 The LineageOS Project
+ * Copyright (C) 2019-2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,11 +26,14 @@ cc_prebuilt_library_shared {
 		none: true,
 	},
 	target: {
+		android_arm: {
+			srcs: ["proprietary/vendor/lib/libsdm-disp-vndapis.so"],
+		},
 		android_arm64: {
 			srcs: ["proprietary/vendor/lib64/libsdm-disp-vndapis.so"],
 		},
 	},
-	compile_multilib: "64",
+	compile_multilib: "both",
 	prefer: true,
 	soc_specific: true,
 }
@@ -66,6 +69,17 @@ android_app_import {
 }
 
 android_app_import {
+	name: "WfdService",
+	owner: "lenovo",
+	apk: "proprietary/priv-app/WfdService/WfdService.apk",
+	certificate: "platform",
+	dex_preopt: {
+		enabled: false,
+	},
+	privileged: true,
+}
+
+android_app_import {
 	name: "ims",
 	owner: "lenovo",
 	apk: "proprietary/priv-app/ims/ims.apk",
@@ -80,17 +94,6 @@ android_app_import {
 	name: "qcrilmsgtunnel",
 	owner: "lenovo",
 	apk: "proprietary/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk",
-	certificate: "platform",
-	dex_preopt: {
-		enabled: false,
-	},
-	privileged: true,
-}
-
-android_app_import {
-	name: "WfdService",
-	owner: "lenovo",
-	apk: "proprietary/system/priv-app/WfdService/WfdService.apk",
 	certificate: "platform",
 	dex_preopt: {
 		enabled: false,
@@ -157,6 +160,6 @@ android_app_import {
 dex_import {
 	name: "WfdCommon",
 	owner: "lenovo",
-	jars: ["proprietary/system/framework/WfdCommon.jar"],
+	jars: ["proprietary/framework/WfdCommon.jar"],
 }
 
